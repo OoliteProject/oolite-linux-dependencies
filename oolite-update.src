@@ -13,10 +13,11 @@
 #             made TOPLEVEL obsolete. OOLITE_ROOT is more than enough.
 # 2011-03-26: Updated to support the new self-extractable package
 # 2011-04-03: Updated to facilitate rsync repository setup for oolite-update script
+# 2013-08-27: Updated new network name of terrastorage to terrastorage.dyndns.info
 # 
 
 
-RSYNC_SERVER_PRIMARY="terrastorage.ath.cx"
+RSYNC_SERVER_PRIMARY="terrastorage.dyndns.info"
 RSYNC_SERVER_SECONDARY="rsync.alioth.net"
 RSYNC_ERR=0
 if [ `id -u` -eq 0 ] 
@@ -104,7 +105,7 @@ if [ ${RSYNC_ERR} != 0 ]; then
    echo "Alternatively you may download the full package from "
    if [ ${TRUNK} ] 
    then
-     echo "http://terrastorage.ath.cx/oolite/status${STATUS_ARCH}.html"
+     echo "http://${RSYNC_SERVER_PRIMARY}/oolite/status${STATUS_ARCH}.html"
    else
      echo "http://www.oolite.org/download.shtml"
    fi
