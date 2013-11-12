@@ -14,6 +14,7 @@
 # 2011-03-26: Updated to support the new self-extractable package
 # 2011-04-03: Updated to facilitate rsync repository setup for oolite-update script
 # 2013-08-27: Updated new network name of terrastorage to terrastorage.dyndns.info
+# 2013-11-13: Updated version comparison to use "build date" as per new version format (i.e. maj.min.rev.gitrev-builddate-githash)
 # 
 
 
@@ -79,7 +80,7 @@ fi
 
 cd ${OOLITE_ROOT}
 CURRENTVER=`cat release.txt`
-SVNREV=`echo ${CURRENTVER} | cut -d '.' -f 4`
+BUILDDATE=`echo ${CURRENTVER} | cut -d '-' -f 2`
 
 # Backup release.txt
 cp -p ${OOLITE_ROOT}/release.txt ${OOLITE_ROOT}/release.txt.backup
@@ -121,19 +122,19 @@ rm -f release.txt.backup
 
 # Inform the user about what happened during update
 NEW_CURRENTVER=`cat release.txt`
-NEW_SVNREV=`echo ${NEW_CURRENTVER} | cut -d '.' -f 4`
-if [ ${NEW_SVNREV} -gt ${SVNREV} ]
+NEW_BUILDDATE=`echo ${NEW_CURRENTVER} | cut -d '-' -f 2`
+if [ ${NEW_BUILDDATE} -gt ${BUILDDATE} ]
 then
    echo "Oolite${TRUNK} has been upgraded from ${CURRENTVER} to ${NEW_CURRENTVER}"
    exit 0
 else
-   if [ ${NEW_SVNREV} -lt ${SVNREV} ]   # TODO - Do not downgrade
+   if [ ${NEW_BUILDDATE} -lt ${BUILDDATE} ]   # TODO - Do not downgrade
    then
       echo "Oolite${TRUNK} has been downgraded from ${CURRENTVER} to ${NEW_CURRENTVER}"
       exit 0
    else
       echo "Your Oolite${TRUNK} installation is already up to date."
-      echo "Any missing Oolite${TRUNK} installation files have been restored."
+      echo "Any missing or altered Oolite${TRUNK} installation files have been restored."
       exit 0
    fi
 fi
