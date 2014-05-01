@@ -18,7 +18,7 @@
 # 
 
 
-RSYNC_SERVER_PRIMARY="terrastorage.dyndns.info"
+RSYNC_SERVER_PRIMARY="terrastorage.no-ip.info"
 RSYNC_SERVER_SECONDARY="rsync.alioth.net"
 RSYNC_ERR=0
 if [ `id -u` -eq 0 ] 
