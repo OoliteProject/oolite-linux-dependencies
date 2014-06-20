@@ -24,19 +24,54 @@ and post any issue, concern or suggestion. Our community is known as being
 
 
 
-Note for Fedora users only
-==========================
-If you encounter sound issues with Oolite try the following workaround:
-1. cd into the Oolite installation folder
-2. execute "mv oolite-deps/lib/libSDL* oolite-deps/." (root privileges may 
-be needed depending on your installation)
-This will force oolite to use your system's libSDL library. If you do not 
-have the library in your system, you should install it and check if that 
-solves your sound issues.
-If you still have issues, join our oolite-linux community at 
-http://aegidian.org/bb/viewforum.php?f=9
-and share your case with us. We have a thing for helping a fellow commander 
-in distress.
+Troubleshoot audio issues
+=========================
+If you encounter sound issues with Oolite, it could be that the prepackaged 
+libraries that come with Oolite are not that much compatible with your system. 
+A workaround is to force Oolite to use your system's libraries instead of the 
+prepackaged ones. 
+The prepackaged Oolite libraries are located under the  
+<Oolite installation folder>/oolite-deps/lib/ folder.
+If any of the following suggestions does not resolve the issue then join us at 
+our oolite-linux community at http://aegidian.org/bb/viewforum.php?f=9
+and share your case with us. 
+We have a thing for helping a fellow commander in distress.
+
+1. Oolite speech synthesis troubleshooting
+------------------------------------------
+To correct issues with Oolite speech synthesis go to the oolite-deps/lib folder 
+and try the following: 
+
+Workaround A: Use the alternative PulseAudio speech synthesis library
+$ cp -p libespeak.so.1 libespeak.so.1.portaudio
+$ cp -p libespeak.so.1.pulseaudio libespeak.so.1
+Now execute oolite. If this doesn't work try the following:
+
+Workaround B: Force Oolite to use your system's libespeak library
+First make sure that you have libespeak.so.1 installed in your system. Then "hide" 
+the Oolite libespeak prepackaged library by going into the oolite-deps/lib 
+folder and executing the following:
+$ mv libespeak.so.1 libespeak.so.1.oolite
+Now execute oolite.
+
+2. No Audio or Oolite fails to execute
+--------------------------------------
+2a. First make sure that you have libSDL-1.2.so.0 installed in your system. Then "hide" 
+the Oolite libSDL prepackaged library by going into the oolite-deps/lib 
+folder and executing the following: 
+$ mv libSDL-1.2.so.0 libSDL-1.2.so.0.oolite
+Now execute oolite. If this doesn't work then restore Oolite prepackaged libSDL
+$ mv libSDL-1.2.so.0.oolite libSDL-1.2.so.0 
+and try the following:
+
+2b. First make sure that you have libopenal.so.1 installed in your system. Then "hide" 
+the Oolite libopenal prepackaged library by going into the oolite-deps/lib 
+folder and executing the following:
+$ mv libopenal.so.1 libopenal.so.1.oolite
+Now execute oolite. 
+
+If this doesn't work either, try hiding both libSDL and libopenal Oolite prepackaged 
+libraries and execute oolite again.
 
 
 
@@ -55,9 +90,21 @@ to the latest release.
 
 Folders that get created during execution
 =========================================
+Note: Please, note, that the folders described in this paragraph are not 
+removed when you uninstall oolite. They are considered as user folders 
+(e.g. AddOns, screenshots, savegames with player's in-game status, 
+game settings, etc.) having files generated with commander's pain and blood. 
+You will have to manually remove them, if you believe that you do not need them 
+and that you will not need them even if you reinstall Oolite in the future.
+
 When you run oolite for the first time a ~/GNUstep/ (~ stands for your home 
 directory path) directory will be created into your home directory. The 
 GNUstep backend needs this. 
+If you decide to use the "Manage Expansion Packs" functionality the 
+~/GNUstep/Library/ApplicationSupport/Oolite/ManagedAddOns/ folder will be created 
+to store the AddOns that you install from within the game itself. This is the only 
+folder (from the folders described in this section) that the uninstaller will 
+remove in case it finds it empty.
 A ~/.Oolite/Logs/ folder is created to store the application Logs folder. 
 When oolite is installed as a system-wide application, the .Oolite folder 
 may also be used to store OXPs visible only by the specific user (~/.Oolite/AddOns.); 
@@ -137,11 +184,7 @@ libespeak.so.1
 (compiled to use libportaudio.so.2 also pre-packaged)
 
 libespeak.so.1.pulseaudio 
-(compiled to use PulseAudio. If you encounter issues with speech synthesis, 
-rename libespeak.so.1 to libespeak.so.1.portaudio and 
-rename libespeak.so.1.pulseaudio to libespeak.so.1 and 
-check if this resolves your speech synthesis case. If it doesn't revert the 
-change and join us to the Oolite-Linux forum to elaborate on the issue.)
+(compiled to use PulseAudio as an alternative if libespeak.so.1 fails)
 
 libffi.so.4
 libgnustep-base.so.1.20 (gnustep-base-1.20.1)
@@ -180,6 +223,8 @@ Call for maintainers
 If you're willing to maintain any non-x86 arch and any non-Linux OS (Oolite 
 is at least known to run on FreeBSD) please let us know at: 
 http://aegidian.org/bb/viewforum.php?f=5
+
+
 
 If it's borked
 ==============
