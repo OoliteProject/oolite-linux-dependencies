@@ -159,9 +159,9 @@ Options A and B can be combined. Oolite will look for add-ons in both
 folders.
 
 If Oolite is installed in your home-folder you may either copy the .oxp folder
-into ~/GNUstep/Oolite/AddOns/ or into ~/.Oolite/AddOns/ . In this case putting
-some add-ons in one folder and some add-ons in another does not have any 
-obvious use.
+into ~/GNUstep/Applications/Oolite/AddOns/ or into ~/.Oolite/AddOns/ . In this
+case putting some add-ons in one folder and some add-ons in another does not
+have any obvious use.
 
 It is suggested that you keep your OXPs in one AddOns folder.
 
