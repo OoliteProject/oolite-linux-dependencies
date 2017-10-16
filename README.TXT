@@ -197,29 +197,42 @@ libespeak.so.1.pulseaudio
 (compiled to use PulseAudio as an alternative if libespeak.so.1 fails)
 
 libffi.so.4
-libgnustep-base.so.1.20 (gnustep-base-1.20.1)
+libgcrypt.so.20
+libgmp.so.10
+libgnustep-base.so.1.20 (gnustep-base-1.20.1 built with TLS support)
+libgnutls.so.30
+libgpg-error.so.0
+libhogweed.so.4
+libnettle.so.6
 libnspr4.so.0d
 libobjc.so.2
 libogg.so.0
 libopenal.so.1 (openal-soft-1.15.1)
 libplc4.so.0d
 libplds4.so.0d
-libpng14.so.14 (libpg-1.4.7)
+libpng14.so.14 (libpng-1.4.7)
 libportaudio.so.2 (PortAudio stable v19 released 2011-03-26)
 libSDL-1.2.so.0 (SDL-1.2.14)
 libvorbisfile.so.3
 libvorbis.so.0
 libz.so.1 
 
-You can download the source tarballs used to build these libraries from:
+Backward compatibility with GLIBC_2.7 Linux systems is achieved using a 
+vanilla installation of Ubuntu 8.04.4. The following source tarballs have 
+been used to build the additional libraries:
 http://ftpmain.gnustep.org/pub/gnustep/core/gnustep-make-2.0.8.tar.gz
 http://ftpmain.gnustep.org/pub/gnustep/core/gnustep-base-1.20.1.tar.gz
 http://www.libsdl.org/release/SDL-1.2.14.tar.gz
 http://kcat.strangesoft.net/openal-releases/openal-soft-1.15.1.tar.bz2
 http://prdownloads.sourceforge.net/libpng/libpng-1.4.7.tar.gz?download
+https://sourceforge.net/projects/libpng/files/zlib/1.2.8/zlib-1.2.8.tar.gz/download
 http://www.portaudio.com/archives/pa_stable_v19_20110326.tgz
 http://downloads.sourceforge.net/project/espeak/espeak/espeak-1.43/espeak-1.43.03-source.zip?use_mirror=kent
-(The rest are the ones that come pre-compiled with Ubuntu 8.04.4.)
+https://gmplib.org/download/gmp/gmp-6.1.0.tar.lz
+ftp://ftp.gnutls.org/gcrypt/gnutls/v3.4/gnutls-3.4.15.tar.xz
+https://gnupg.org/ftp/gcrypt/libgcrypt/libgcrypt-1.7.3.tar.bz2
+https://gnupg.org/ftp/gcrypt/libgpg-error/libgpg-error-1.24.tar.bz2
+https://ftp.gnu.org/gnu/nettle/nettle-3.2.tar.gz
 
 All of these dependencies are pretty straightforward to compile.
 If you're constructing a package for a non-x86 or non-Linux platform,
