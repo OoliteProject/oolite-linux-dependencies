@@ -19,18 +19,11 @@
 # 2011-03-26: Updated to support the new self-extractable package
 # 2011-04-03: Updated to facilitate rsync repository setup for oolite-update script
 # 2013-01-27: (CIM) Fix argument parsing as per Walbrigg at http://aegidian.org/bb/viewtopic.php?p=193962#p193962
+# 2023-07-10: (hiran) Move interactive parts to calling script
 # 
 
 
 OOLITE_ROOT=$(cd $(dirname $0); cd ..; pwd -P)
-
-if [ ! -f $HOME/.Oolite/.oolite${TRUNK}-run ]
-then
-   mkdir -p $HOME/.Oolite/
-   touch $HOME/.Oolite/.oolite${TRUNK}-run
-   cat ${OOLITE_ROOT}/doc/README-PREAMBLE.TXT \
-        ${OOLITE_ROOT}/doc/README.TXT | more
-fi
 
 # Oolite fails with a black message box with no text with the title
 # 'Critical' if this doesn't exist.
@@ -63,13 +56,14 @@ export ESPEAK_DATA_PATH=${OOLITE_ROOT}/oolite.app/Resources/
 
 cd ${OOLITE_ROOT}/
 ./oolite.app/oolite "$@"
-if [ $? != 0 ]
+RC=$?
+
+if [ "${RC}" != "0" ]
 then
    echo
    echo "Erk. It looks like Oolite${TRUNK} died with an error. When making an error"
    echo "report, please copy + paste the log above into the report."
    echo
-   echo "(Press Ctrl-C to continue)"
-   cat
 fi
 
+exit $RC
